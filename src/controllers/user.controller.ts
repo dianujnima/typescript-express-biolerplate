@@ -1,6 +1,5 @@
-import { Get, Route, Tags,  Post, Body, Path } from "tsoa";
-import {User} from '../models'
-import {getUsers, createUser, IUserPayload, getUser} from '../repositories/user.repository'
+import { Get, Route, Tags,  Post, Body, Path, Delete } from "tsoa";
+import {getUsers, createUser, IUserPayload, getUser, deleteUser, User} from '../repositories/user.repository'
 
 @Route("users")
 @Tags("User")
@@ -18,5 +17,10 @@ export default class UserController {
   @Get("/:id")
   public async getUser(@Path() id: string): Promise<User | null> {
     return getUser(Number(id))
+  }
+
+  @Delete("/:id")
+  public async deleteUser(@Path() id: string): Promise<string | null> {
+    return deleteUser(Number(id))
   }
 }
